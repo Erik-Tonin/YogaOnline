@@ -1,4 +1,4 @@
-Este projeto de estudo é feito para ter uma base de contrução utilizando metodologias da Clean Architecture.
+Este projeto de estudo é feito para ter uma base de construção utilizando metodologias da Clean Architecture.
 
 
 
