@@ -16,5 +16,10 @@ namespace YogaOnline.Infra.Repositories
         {
             return _context.Users.FirstOrDefaultAsync(x => x.Email == email);
         }
+
+        public Task<User> GetCPF(string cpf)
+        {
+            return _context.Users.FirstOrDefaultAsync(x => x.Cpf == cpf);
+        }
     }
 }

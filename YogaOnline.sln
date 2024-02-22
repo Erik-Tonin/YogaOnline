@@ -5,13 +5,13 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YogaOnline", "YogaOnline\YogaOnline.csproj", "{A4FC8711-1342-44D1-A704-33930E815709}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Presentation", "0 - Presentation", "{95A1552F-5F22-4A09-9828-9A0865A2B958}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Yoga.Presentation", "0 - Yoga.Presentation", "{95A1552F-5F22-4A09-9828-9A0865A2B958}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Application", "1 - Application", "{7FAB00E1-6581-4BA0-9EA5-10C3C39FA33D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Yoga.Application", "1 - Yoga.Application", "{7FAB00E1-6581-4BA0-9EA5-10C3C39FA33D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Domain", "2 - Domain", "{611B4089-ED79-4126-9E9C-5E4235A7A473}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Yoga.Domain", "2 - Yoga.Domain", "{611B4089-ED79-4126-9E9C-5E4235A7A473}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infra", "3 - Infra", "{ADABF963-8EDC-4284-A03D-7380756E10E9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Yoga.Infra", "3 - Yoga.Infra", "{ADABF963-8EDC-4284-A03D-7380756E10E9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Crosscutting", "4 - Crosscutting", "{31605F46-5B09-4235-BB4E-123B0520C3F2}"
 EndProject

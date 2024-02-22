@@ -16,31 +16,75 @@ namespace YogaOnline.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("NewUser")]
-        public async Task<IActionResult> NewUser(UserDTO userDTO)
+        [HttpPost("Register")]
+        public async Task<User> Register(User userDTO)
         {
-            return CustomResponse(await _userService.NewUser(userDTO));
+            User user = await _userService.Register(userDTO);
+
+            return user;
+        }
+
+        [AllowAnonymous]
+        [HttpGet("GetAll")]
+        public async Task<IEnumerable<UserDTO>> GetAll()
+        {
+            return await _userService.GetAll();
+        }
+
+        [AllowAnonymous]
+        [HttpPut("UpdateUser")]
+        public async Task<IActionResult> UpdateUser(UserDTO user)
+        {
+            return CustomResponse(await _userService.UpdateUser(user));
         }
 
         [AllowAnonymous]
         [HttpGet("GetById")]
-        public async Task<User> GetById(int id)
+        public async Task<UserDTO> GetById(int id)
         {
             return await _userService.GetById(id);
         }
 
         [AllowAnonymous]
-        [HttpPut("changeUser")]
-        public async Task<IActionResult> ChangeUser(int id, UserDTO user)
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete(int id)
         {
-            return CustomResponse(await _userService.UpdateUser(id, user));
+            return CustomResponse(await _userService.Delete(id));
         }
 
         [AllowAnonymous]
-        [HttpDelete("DeleteUser")]
-        public async Task<IActionResult> DeleteUser(int id)
+        [HttpGet("GetByEmail")]
+        public async Task<UserDTO> GetByEmail(string email)
         {
-            return CustomResponse(await _userService.DeleteUser(id));
+            return await _userService.GetByEmail(email);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("GetCPF")]
+        public async Task<UserDTO> GetCPF(string cpf)
+        {
+            return await _userService.GetCPF(cpf);
+        }
+
+        [AllowAnonymous]
+        [HttpPut("UpdatePassword")]
+        public async Task<IActionResult> UpdatePassword(int id, string password, string confirmPassword)
+        {
+            return CustomResponse(await _userService.UpdatePassword(id, password, confirmPassword));
+        }
+
+        [AllowAnonymous]
+        [HttpPut("ForgotPassword")]
+        public async Task<IActionResult> ForgotPassword(UserDTO dto)
+        {
+            return CustomResponse(await _userService.ForgotPassword(dto));
+        }
+
+        [AllowAnonymous]
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(string email, string password)
+        {
+            return CustomResponse(await _userService.Login(email, password));
         }
     }
 }
