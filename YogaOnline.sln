@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YogaOnline.Infra", "YogaOnline.Infra\YogaOnline.Infra.csproj", "{F5301D8C-2370-4098-A3D9-B6FB85ED50C9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Yoga.UnitTests", "5 - Yoga.UnitTests", "{F194FD49-8E3A-48A8-9548-868674E96FAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
