@@ -15,54 +15,203 @@ namespace Application.Implementations
             _userRepository = userRepository;
         }
 
-        public async Task<ValidationResult> NewUser(UserDTO userDTO)
+        public async Task<User> Register(User userDTO)
         {
             User user = await _userRepository.GetByEmail(userDTO.Email);
 
+            if (user != null)
+            {
+                AddValidationError("Usuário já cadastrado.", "Já existe um usuário cadastrado com o mesmo e-mail.");
+            }
+
+            if (userDTO.Password != userDTO.ConfirmPassword)
+            {
+                throw new Exception("As senhas não correspondem.");
+            }
+
+            string hashedPassword = PasswordHasher.HashPassword(userDTO.Password);
+            string hashedConfirmPassword = PasswordHasher.HashPassword(userDTO.ConfirmPassword);
+
             user = new User(
                 userDTO.Name,
-                userDTO.Email);
+                userDTO.Email,
+                userDTO.Cpf,
+                userDTO.Birthday,
+                hashedPassword,
+                hashedConfirmPassword);
 
             await _userRepository.Add(user);
-
-            return user.ValidationResult;
-        }
-
-
-        public async Task<User> GetById(int id)
-        {
-            User user = await _userRepository.GetById(id);
 
             return user;
         }
 
-        public async Task<ValidationResult> UpdateUser(int id, UserDTO user)
+        public async Task<IEnumerable<UserDTO>> GetAll()
         {
 
-            User getUser = await _userRepository.GetById(id);
-            if (user == null)
-                AddValidationError("Usuario não encontrada.", "Não existe nenhum usuario cadastrado na base com esse id.");
-            else
+            var users = _userRepository.GetAll();
+            return await Task.FromResult(users.Select(x => new UserDTO()
             {
-                getUser.UpdateUser(user.Name, user.Email);
-                _userRepository.Update(getUser);
-            }
-
-            return ValidationResult;
+                Id = x.Id,
+                Name = x.Name,
+                Email = x.Email,
+                CPF = x.Cpf,
+                Birthday = x.Birthday
+            }));
         }
 
-        public async Task<ValidationResult> DeleteUser(int id)
+        public async Task<ValidationResult> UpdateUser(UserDTO user)
         {
-            User getUser = await _userRepository.GetById(id);
+            User getUser = await _userRepository.GetById(user.Id);
 
-            if (getUser == null)
-                AddValidationError("Usuario não encontrado.", "Não existe nenhum usuario cadastrado na base com esse id.");
+            if (getUser.IsValid())
+            {
+                getUser.UpdateUser(
+                    user.Name,
+                    user.Email,
+                    user.CPF,
+                    user.Birthday);
+
+                _userRepository.Update(getUser);
+            }
             else
             {
-                _userRepository.Remove(getUser);
+                return getUser.ValidationResult;
             }
 
-            return ValidationResult;
+            return getUser.ValidationResult;
+        }
+
+        public async Task<UserDTO> GetById(int id)
+        {
+            User user = await _userRepository.GetById(id);
+
+            return new UserDTO()
+            {
+                Id = id,
+                Name = user.Name,
+                Email = user.Email,
+                CPF = user.Cpf,
+                Birthday = user.Birthday
+            };
+        }
+
+        public async Task<ValidationResult> Delete(int id)
+        {
+            User user = await _userRepository.GetById(id);
+
+            if (user == null)
+                return new ValidationResult();
+            else
+                _userRepository.Remove(user);
+
+            return user.ValidationResult;
+        }
+
+        public async Task<UserDTO> GetByEmail(string email)
+        {
+            User user = await _userRepository.GetByEmail(email);
+
+            return new UserDTO()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                CPF = user.Cpf, 
+                Birthday = user.Birthday
+            };
+        }
+
+        public async Task<UserDTO> GetCPF(string cpf)
+        {
+            User user = await _userRepository.GetCPF(cpf);
+
+            return new UserDTO()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                CPF = user.Cpf,
+                Birthday = user.Birthday
+            };
+        }
+
+        public async Task<ValidationResult> UpdatePassword(int id, string password, string confirmPassword)
+        {
+            User user = await _userRepository.GetById(id);
+
+            if (password != confirmPassword)
+            {
+                throw new Exception("As senhas não correspondem.");
+            }
+
+            string hashedPassword = PasswordHasher.HashPassword(password);
+            string hashedConfirmPassword = PasswordHasher.HashPassword(confirmPassword);
+
+            if (user.IsValid())
+            {
+                user.UpdatePassword(
+                    hashedPassword,
+                    hashedConfirmPassword);
+
+                _userRepository.Update(user);
+            }
+            else
+            {
+                return user.ValidationResult;
+            }
+
+            return user.ValidationResult;
+        }
+
+        public async Task<ValidationResult> ForgotPassword(UserDTO dto)
+        {
+            User user = await _userRepository.GetById(dto.Id);
+
+            if (user.Email != dto.Email && user.Birthday != dto.Birthday && user.Cpf != dto.CPF)
+            {
+                throw new Exception("Não foi possivel alterar a senha. Contate o adm.");
+            }
+
+            bool correctData = user.ForgotPassword(dto.Email, dto.Birthday, dto.CPF);
+
+            if ((dto.Password != dto.ConfirmPassword) || correctData == false)
+            {
+                throw new Exception("As senhas não correspondem.");
+            }
+
+            string hashedPassword = PasswordHasher.HashPassword(dto.Password);
+            string hashedConfirmPassword = PasswordHasher.HashPassword(dto.ConfirmPassword);
+
+            if (user.IsValid())
+            {
+                user.UpdatePassword(
+                    hashedPassword,
+                    hashedConfirmPassword);
+
+                _userRepository.Update(user);
+            }
+            else
+            {
+                return user.ValidationResult;
+            }
+
+            return user.ValidationResult;
+        }
+
+        public async Task<ValidationResult> Login(string email, string password)
+        {
+            User user = await _userRepository.GetByEmail(email);
+
+            string hashedPassword = PasswordHasher.HashPassword(password);
+
+            bool login = user.Login(email, hashedPassword);
+
+            if (!login)
+            {
+                throw new Exception("Não foi possivel fazer o login");
+            }
+
+            return user.ValidationResult;
         }
     }
 }
