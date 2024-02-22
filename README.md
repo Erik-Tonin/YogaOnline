@@ -1,8 +1,8 @@
 Este projeto de estudo é feito para ter uma base de construção utilizando metodologias da Clean Architecture.
 
 YogaOnline.API, tem como proposito:
-  Criar cadastrado,
-  Alterar Cadastrar,
+  Criar cadastro,
+  Alterar Cadastro,
   Login e
   Carregar professores
 
