@@ -1,8 +1,5 @@
-﻿using FluentValidation.Results;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
+﻿using Microsoft.EntityFrameworkCore;
 using YogaOnline.Domain.Entities;
-using YogaOnline.Infra.EntityMappers;
 
 namespace YogaOnline.Infra.Context
 {
@@ -15,6 +12,7 @@ namespace YogaOnline.Infra.Context
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
