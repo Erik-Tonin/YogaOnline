@@ -11,6 +11,8 @@ namespace YogaOnline.Domain.Entities
         public string Password { get; private set; }
         public string ConfirmPassword { get; private set; }
 
+        protected User() { }
+
         public User(string name, string email, string cpf, DateTime birthday, string password, string confirmPassword)
         {
             Name = name;

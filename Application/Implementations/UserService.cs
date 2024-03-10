@@ -15,7 +15,7 @@ namespace Application.Implementations
             _userRepository = userRepository;
         }
 
-        public async Task<User> Register(User userDTO)
+        public async Task<User> Register(UserDTO userDTO)
         {
             User user = await _userRepository.GetByEmail(userDTO.Email);
 
@@ -35,7 +35,7 @@ namespace Application.Implementations
             user = new User(
                 userDTO.Name,
                 userDTO.Email,
-                userDTO.Cpf,
+                userDTO.CPF,
                 userDTO.Birthday,
                 hashedPassword,
                 hashedConfirmPassword);
@@ -61,7 +61,8 @@ namespace Application.Implementations
 
         public async Task<ValidationResult> UpdateUser(UserDTO user)
         {
-            User getUser = await _userRepository.GetById(user.Id);
+            
+            User getUser = await _userRepository.GetByEmail(user.Email);
 
             if (getUser.IsValid())
             {
@@ -165,7 +166,7 @@ namespace Application.Implementations
 
         public async Task<ValidationResult> ForgotPassword(UserDTO dto)
         {
-            User user = await _userRepository.GetById(dto.Id);
+            User user = await _userRepository.GetByEmail(dto.Email);
 
             if (user.Email != dto.Email && user.Birthday != dto.Birthday && user.Cpf != dto.CPF)
             {
