@@ -7,6 +7,7 @@ using YogaOnline.Domain.Entities;
 
 namespace YogaOnline.Controllers
 {
+    [Route("api/[controller]")]
     public class TeacherController : ApiController
     {
         private readonly ITeacherApplicationService _teacherApplicationService;

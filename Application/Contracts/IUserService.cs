@@ -6,7 +6,7 @@ namespace Application.Contracts
 {
     public interface IUserService
     {
-        Task<User> Register(User userDTO);
+        Task<User> Register(UserDTO userDTO);
         Task<IEnumerable<UserDTO>> GetAll();
         Task<ValidationResult> UpdateUser(UserDTO user);
         Task<UserDTO> GetById(int id);

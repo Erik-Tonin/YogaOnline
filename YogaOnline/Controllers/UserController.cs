@@ -6,6 +6,7 @@ using YogaOnline.Domain.Entities;
 
 namespace YogaOnline.Controllers
 {
+    [Route("api/[controller]")]
     public class UserController : ApiController
     {
         private readonly IUserService _userService;
@@ -17,7 +18,7 @@ namespace YogaOnline.Controllers
 
         [AllowAnonymous]
         [HttpPost("Register")]
-        public async Task<User> Register(User userDTO)
+        public async Task<User> Register([FromForm] UserDTO userDTO)
         {
             User user = await _userService.Register(userDTO);
 
