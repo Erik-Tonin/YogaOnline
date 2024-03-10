@@ -12,3 +12,5 @@ Especificações:
 Testes unitarios:
   XUnit e
   Mock
+
+Este projeto é vinculado com https://github.com/Erik-Tonin/YogaOnlineApp
