@@ -3,7 +3,9 @@ using Application.Implementations;
 using Application.Mappings;
 using Microsoft.EntityFrameworkCore;
 using YogaOnline.Domain.Contracts.IRepositories;
+using YogaOnline.Domain.Contracts.IServices;
 using YogaOnline.Infra.Context;
+using YogaOnline.Infra.Proxy;
 using YogaOnline.Infra.Repositories;
 
 
@@ -31,6 +33,7 @@ builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 //Services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITeacherApplicationService, TeacherApplicationService>();
+builder.Services.AddScoped<IFileStorage, FileStorage>();
 
 //Repository
 builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));

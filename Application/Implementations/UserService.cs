@@ -2,6 +2,7 @@
 using Application.DTOs;
 using FluentValidation.Results;
 using YogaOnline.Domain.Contracts.IRepositories;
+using YogaOnline.Domain.Contracts.IServices;
 using YogaOnline.Domain.Entities;
 
 
@@ -10,12 +11,14 @@ namespace Application.Implementations
     public class UserService : ApplicationServiceBase, IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private readonly IFileStorage _fileStorage;
+        public UserService(IUserRepository userRepository, IFileStorage fileStorage)
         {
             _userRepository = userRepository;
+            _fileStorage = fileStorage;
         }
 
-        public async Task<User> Register(UserDTO userDTO)
+        public async Task<ValidationResultDTO<User>> Register(UserDTO userDTO)
         {
             User user = await _userRepository.GetByEmail(userDTO.Email);
 
@@ -40,9 +43,17 @@ namespace Application.Implementations
                 hashedPassword,
                 hashedConfirmPassword);
 
+
+            string imageURL = userDTO.File != null
+                ? await _fileStorage.UploadFile(userDTO.File, user.Id.ToString())
+                : "";
+
+
+            user.UpdateImage(imageURL);
+
             await _userRepository.Add(user);
 
-            return user;
+            return CustomValidationDataResponse<User>(user);
         }
 
         public async Task<IEnumerable<UserDTO>> GetAll()

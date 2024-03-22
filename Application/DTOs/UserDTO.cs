@@ -1,4 +1,6 @@
-﻿namespace Application.DTOs
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Application.DTOs
 {
     public class UserDTO
     {
@@ -9,5 +11,6 @@
         public DateTime Birthday { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
+        public IFormFile File { get; set;}
     }
 }

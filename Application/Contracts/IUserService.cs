@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.Implementations;
 using FluentValidation.Results;
 using YogaOnline.Domain.Entities;
 
@@ -6,7 +7,7 @@ namespace Application.Contracts
 {
     public interface IUserService
     {
-        Task<User> Register(UserDTO userDTO);
+        Task<ValidationResultDTO<User>> Register(UserDTO userDTO);
         Task<IEnumerable<UserDTO>> GetAll();
         Task<ValidationResult> UpdateUser(UserDTO user);
         Task<UserDTO> GetById(int id);

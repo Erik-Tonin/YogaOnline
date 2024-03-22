@@ -10,6 +10,7 @@ namespace YogaOnline.Domain.Entities
         public DateTime Birthday { get; private set; }
         public string Password { get; private set; }
         public string ConfirmPassword { get; private set; }
+        public string ImageURL { get; private set; }
 
         protected User() { }
 
@@ -84,6 +85,11 @@ namespace YogaOnline.Domain.Entities
             DateUpdated = DateTime.Now;
 
             return true;
+        }
+
+        public void UpdateImage(string imageURL)
+        {
+            ImageURL = imageURL;
         }
 
 

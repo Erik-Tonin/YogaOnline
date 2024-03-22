@@ -1,5 +1,6 @@
 ﻿using Application.Contracts;
 using Application.DTOs;
+using Application.Implementations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using YogaOnline.Domain.Entities;
@@ -18,9 +19,11 @@ namespace YogaOnline.Controllers
 
         [AllowAnonymous]
         [HttpPost("Register")]
-        public async Task<User> Register([FromForm] UserDTO userDTO)
+        public async Task<ValidationResultDTO<User>> Register(IFormFile file, [FromForm] UserDTO userDTO)
         {
-            User user = await _userService.Register(userDTO);
+
+            userDTO.File = file;
+            ValidationResultDTO<User> user = await _userService.Register(userDTO);
 
             return user;
         }
