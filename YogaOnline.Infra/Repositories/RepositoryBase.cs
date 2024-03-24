@@ -19,7 +19,7 @@ namespace YogaOnline.Infra.Repositories
             _context.SaveChanges();
         }
 
-        public virtual async Task<TEntity> GetById(int id)
+        public virtual async Task<TEntity> GetById(Guid id)
         {
             return await _context.Set<TEntity>().FindAsync(id);
         }

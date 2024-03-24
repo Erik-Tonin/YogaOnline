@@ -7,7 +7,7 @@ namespace Application.Contracts
     {
         Task<Teacher> Register(Teacher teacher);
         Task<IEnumerable<TeacherDTO>> GetAllSegmentation();
-        Task<IEnumerable<TeacherDTO>> GetByIdSegmentation(int id);
+        Task<IEnumerable<TeacherDTO>> GetByIdSegmentation(Guid id);
         Task<IEnumerable<Teacher>> GetPagedTeachers(int pageIndex, int pageSize);
     }
 }

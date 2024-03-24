@@ -4,7 +4,7 @@ namespace Application.DTOs
 {
     public class UserDTO
     {
-        public int? Id { get; set; }
+        public Guid? Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string CPF { get; set; }
@@ -12,5 +12,7 @@ namespace Application.DTOs
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public IFormFile File { get; set;}
+        public string ImageUrl { get; set; }
+
     }
 }
