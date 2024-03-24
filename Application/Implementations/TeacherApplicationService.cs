@@ -50,7 +50,7 @@ namespace Application.Implementations
             }));
         }
 
-        public async Task<IEnumerable<TeacherDTO>> GetByIdSegmentation(int id)
+        public async Task<IEnumerable<TeacherDTO>> GetByIdSegmentation(Guid id)
         {
             Teacher teacher = await _teacherRepository.GetById(id);
 

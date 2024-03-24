@@ -37,7 +37,7 @@ namespace YogaOnline.Controllers
 
         [AllowAnonymous]
         [HttpGet("GetByIdSegmentation")]
-        public async Task<IEnumerable<TeacherDTO>> GetByIdSegmentation(int id)
+        public async Task<IEnumerable<TeacherDTO>> GetByIdSegmentation(Guid id)
         {
             return await _teacherApplicationService.GetByIdSegmentation(id);
         }

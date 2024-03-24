@@ -93,7 +93,7 @@ namespace Application.Implementations
             return getUser.ValidationResult;
         }
 
-        public async Task<UserDTO> GetById(int id)
+        public async Task<UserDTO> GetById(Guid id)
         {
             User user = await _userRepository.GetById(id);
 
@@ -107,7 +107,7 @@ namespace Application.Implementations
             };
         }
 
-        public async Task<ValidationResult> Delete(int id)
+        public async Task<ValidationResult> Delete(Guid id)
         {
             User user = await _userRepository.GetById(id);
 
@@ -129,7 +129,9 @@ namespace Application.Implementations
                 Name = user.Name,
                 Email = user.Email,
                 CPF = user.Cpf, 
-                Birthday = user.Birthday
+                Birthday = user.Birthday,
+                ImageUrl = user.ImageURL
+
             };
         }
 
@@ -147,7 +149,7 @@ namespace Application.Implementations
             };
         }
 
-        public async Task<ValidationResult> UpdatePassword(int id, string password, string confirmPassword)
+        public async Task<ValidationResult> UpdatePassword(Guid id, string password, string confirmPassword)
         {
             User user = await _userRepository.GetById(id);
 

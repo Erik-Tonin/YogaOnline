@@ -19,10 +19,9 @@ namespace YogaOnline.Controllers
 
         [AllowAnonymous]
         [HttpPost("Register")]
-        public async Task<ValidationResultDTO<User>> Register(IFormFile file, [FromForm] UserDTO userDTO)
+        public async Task<ValidationResultDTO<User>> Register([FromForm] UserDTO userDTO)
         {
 
-            userDTO.File = file;
             ValidationResultDTO<User> user = await _userService.Register(userDTO);
 
             return user;
@@ -44,14 +43,14 @@ namespace YogaOnline.Controllers
 
         [AllowAnonymous]
         [HttpGet("GetById")]
-        public async Task<UserDTO> GetById(int id)
+        public async Task<UserDTO> GetById(Guid id)
         {
             return await _userService.GetById(id);
         }
 
         [AllowAnonymous]
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             return CustomResponse(await _userService.Delete(id));
         }
@@ -72,7 +71,7 @@ namespace YogaOnline.Controllers
 
         [AllowAnonymous]
         [HttpPut("UpdatePassword")]
-        public async Task<IActionResult> UpdatePassword(int id, string password, string confirmPassword)
+        public async Task<IActionResult> UpdatePassword(Guid id, string password, string confirmPassword)
         {
             return CustomResponse(await _userService.UpdatePassword(id, password, confirmPassword));
         }
