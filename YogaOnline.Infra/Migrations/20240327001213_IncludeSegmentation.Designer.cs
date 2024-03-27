@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YogaOnline.Infra.Context;
 
@@ -10,9 +11,11 @@ using YogaOnline.Infra.Context;
 namespace YogaOnline.Infra.Migrations
 {
     [DbContext(typeof(MicroServiceContext))]
-    partial class MicroServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20240327001213_IncludeSegmentation")]
+    partial class IncludeSegmentation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,8 +77,8 @@ namespace YogaOnline.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("SegmentationId")
-                        .HasColumnType("char(36)");
+                    b.Property<int>("SegmentationId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

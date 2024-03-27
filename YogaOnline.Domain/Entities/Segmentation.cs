@@ -7,7 +7,7 @@ namespace YogaOnline.Domain.Entities
         /// <summary>
         /// Object instance.
         /// </summary>
-        public Segmentation(int id, string name)
+        public Segmentation(Guid id, string name)
         {
             Id = id;
             Name = name;
@@ -17,7 +17,7 @@ namespace YogaOnline.Domain.Entities
         /// Constructor without parameters to EF.
         /// </summary>
 
-        public int Id { get; private set; }
+        public Guid Id { get; private set; }
         public string Name { get; private set; }
     }
 }

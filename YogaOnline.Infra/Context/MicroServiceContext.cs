@@ -13,6 +13,7 @@ namespace YogaOnline.Infra.Context
 
         public DbSet<User> Users { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Segmentation> Segmentations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

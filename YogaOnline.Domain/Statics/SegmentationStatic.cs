@@ -7,17 +7,17 @@ namespace YogaOnline.Domain.Statics
         /// <summary>
         /// Object instance.
         /// </summary>
-        public SegmentationStatic(int id, string name)
+        public SegmentationStatic(Guid id, string name)
         {
             Id = id;
             Name = name;
         }
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public static SegmentationStatic Lighter = new SegmentationStatic(99, "Mais leve");
-        public static SegmentationStatic MoreAgitated = new SegmentationStatic(98, "Mais agitado");
-        public static SegmentationStatic Fun = new SegmentationStatic(88, "Divertido");
+        public static SegmentationStatic Lighter = new SegmentationStatic(Guid.Parse("93497a8e-ccf5-4214-a76e-07f2ae45245d"), "Mais leve");
+        public static SegmentationStatic MoreAgitated = new SegmentationStatic(Guid.Parse("8aaf42b7-790d-4264-aec3-1c788b045062"), "Mais agitado");
+        public static SegmentationStatic Fun = new SegmentationStatic(Guid.Parse("db314610-87f1-42fa-8426-f0607cc30c84"), "Divertido");
 
         public static List<SegmentationStatic> GetAll()
         {
@@ -29,7 +29,7 @@ namespace YogaOnline.Domain.Statics
             };
         }
 
-        public static SegmentationStatic GetById(int id)
+        public static SegmentationStatic GetById(Guid id)
         {
             return GetAll().FirstOrDefault(x => x.Id == id);
         }

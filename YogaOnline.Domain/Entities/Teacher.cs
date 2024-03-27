@@ -9,12 +9,12 @@ namespace YogaOnline.Domain.Entities
         public string Email { get; private set; }
         public string NumberRegister { get; private set; }
         public string Profession { get; private set; }
-        public int SegmentationId { get; private set; }
+        public Guid SegmentationId { get; private set; }
         //public virtual Segmentation Segmentation { get; private set; }
 
 
 
-        public Teacher(string name, string email, string numberRegister, string profession, int segmentationId)
+        public Teacher(string name, string email, string numberRegister, string profession, Guid segmentationId)
         {
             Name = name;
             Email = email;
@@ -24,7 +24,7 @@ namespace YogaOnline.Domain.Entities
             DateCreated = DateTime.Now;
         }
 
-        public void UpdateTeacher(string name, string email, string numberRegister, string profession, int segmentationId)
+        public void UpdateTeacher(string name, string email, string numberRegister, string profession, Guid segmentationId)
         {
             Name = name;
             Email = email;
